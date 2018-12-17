@@ -1,9 +1,10 @@
 import HelloWorld from '../components/HelloWorld'
+import Main from '@/components/main'
 
 export default [
     {
-        path: '/login',
+        path: '/',
         name: 'login',
-        component: HelloWorld,
+        component: Main,
     }
 ]
