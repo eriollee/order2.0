@@ -1,11 +1,21 @@
 import {
-    getMenuByRouter
+    getMenuByRouter,
+    getHomeRoute
 } from '@/libs/util'
+import config from '@/config'
+const { homeName } = config
 
 export default {
     state: {
+        homeRoute: {},
     },
     getters: {
       menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access),
     },
+    mutations: {
+        setHomeRoute (state, routes) {
+          state.homeRoute = getHomeRoute(routes, homeName)
+        }
+    }
 }
+

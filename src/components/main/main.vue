@@ -7,6 +7,10 @@
 </template>
 
 <script>
+import './main.less'
+import SideMenu from './components/side-menu'
+import routers from '@/router/routers'
+import { mapMutations, mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Main',
   props: {
@@ -14,10 +18,20 @@ export default {
   },
   data () {
     return {
-      collapsed: false,
-      isFullscreen: false
+      collapsed: false
     }
   },
+  mounted () {
+    this.setHomeRoute(routers)
+  },
+  computed: {
+
+  },
+  methods: {
+    ...mapMutations([
+      'setHomeRoute'
+    ])
+  }
 }
 </script>
 

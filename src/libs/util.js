@@ -19,6 +19,28 @@ export const getMenuByRouter = (list, access) => {
     return res
 }
 
+/**
+ * @param {Array} routers 路由列表数组
+ * @description 用于找到路由列表中name为home的对象
+ */
+export const getHomeRoute = (routers, homeName = 'home') => {
+    let i = -1
+    console.log(routers)
+    let len = routers.length
+    let homeRoute = {}
+    while (++i < len) {
+      let item = routers[i]
+      if (item.children && item.children.length) {
+        let res = getHomeRoute(item.children, homeName)
+        if (res.name) return res
+      } else {
+        if (item.name === homeName) homeRoute = item
+      }
+    }
+    console.log(homeRoute)
+    return homeRoute
+  }
+
 //是否有子菜单
 export const hasChild = (item) => {
     return item.children && item.children.length !== 0
