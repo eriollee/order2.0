@@ -1,7 +1,7 @@
 <template>
   <div class="side-menu-wrapper">
     <slot></slot> 
-    <Menu ref="menu"  :active-name="activeName"  >
+    <Menu ref="menu"  :active-name="activeName" :theme="theme" >
       <template v-for="item in menuList">
           <menu-item :name="getNameOrHref(item)" :key="`menu-${item.name}`"><common-icon :type="item.icon || ''"/><span>{{ showTitle(item) }}</span></menu-item>
       </template>
@@ -21,6 +21,10 @@ export default {
       default () {
         return []
       }
+    },
+    theme: {
+      type: String,
+      default: 'dark'
     },
     activeName: {
       type: String,
