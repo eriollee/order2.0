@@ -1,7 +1,9 @@
 <template>
   <Layout style="height: 100%" class="main">
     <Sider hide-trigger collapsible :width="256" :collapsed-width="64" v-model="collapsed" class="left-sider" :style="{overflow: 'hidden'}">
-         12313213
+      <side-menu :menu-list="menuList">
+ 
+      </side-menu>
     </Sider>
   </Layout>
 </template>
@@ -16,6 +18,9 @@ export default {
   props: {
     msg: String
   },
+  components: {
+    SideMenu
+  },
   data () {
     return {
       collapsed: false
@@ -25,7 +30,10 @@ export default {
     this.setHomeRoute(routers)
   },
   computed: {
-
+    menuList () {
+      console.log('menuList')
+      return this.$store.getters.menuList
+    },
   },
   methods: {
     ...mapMutations([

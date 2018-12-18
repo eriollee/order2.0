@@ -3,6 +3,8 @@ import {
     getHomeRoute
 } from '@/libs/util'
 import config from '@/config'
+import router from '@/router'
+import routers from '@/router/routers'
 const { homeName } = config
 
 export default {

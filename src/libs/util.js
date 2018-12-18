@@ -1,5 +1,14 @@
+
+import { forEach, hasOneOf, } from '@/libs/tools'
+//显示菜单名称
+export const showTitle = (item, vm) => {
+  let { title } = item.meta
+  return title
+}
+
 export const getMenuByRouter = (list, access) => {
     let res = []
+
     forEach(list, item => {
       if (!item.meta || (item.meta && !item.meta.hideInMenu)) {
         let obj = {
@@ -16,6 +25,8 @@ export const getMenuByRouter = (list, access) => {
         if (showThisMenuEle(item, access)) res.push(obj)
       }
     })
+    console.log('getMenuByRouter')
+    console.log(res)
     return res
 }
 
@@ -37,7 +48,7 @@ export const getHomeRoute = (routers, homeName = 'home') => {
         if (item.name === homeName) homeRoute = item
       }
     }
-    console.log(homeRoute)
+   // console.log(homeRoute)
     return homeRoute
   }
 
