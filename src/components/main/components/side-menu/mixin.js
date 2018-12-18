@@ -1,5 +1,9 @@
+import CommonIcon from '../../../common-icon'
 import { showTitle } from '@/libs/util'
 export default {
+  components: {
+    CommonIcon
+  },
   methods: {
     showTitle (item) {
       return showTitle(item, this)
