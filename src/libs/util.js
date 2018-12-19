@@ -63,8 +63,8 @@ export const getMenuByRouter = (list, access) => {
         if (showThisMenuEle(item, access)) res.push(obj)
       }
     })
-    console.log('getMenuByRouter')
-    console.log(res)
+    // console.log('getMenuByRouter')
+    // console.log(res)
     return res
 }
 
@@ -74,7 +74,7 @@ export const getMenuByRouter = (list, access) => {
  */
 export const getHomeRoute = (routers, homeName = 'home') => {
     let i = -1
-    console.log(routers)
+ //   console.log(routers)
     let len = routers.length
     let homeRoute = {}
     while (++i < len) {

@@ -15,9 +15,9 @@ export default {
       menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access),
     },
     mutations: {
-        setHomeRoute (state, routes) {
-          state.homeRoute = getHomeRoute(routes, homeName)
-        }
+        // setHomeRoute (state, routes) {
+        //   state.homeRoute = getHomeRoute(routes, homeName)
+        // }
     }
 }
 
