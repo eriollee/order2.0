@@ -31,7 +31,7 @@ export default [
         component: Main,
         children: [
           {
-            path: 'order_list',
+            path: 'list',
             name: 'order_list',
             meta: {
               icon: 'ios-hammer',
