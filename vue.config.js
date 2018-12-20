@@ -63,7 +63,14 @@ module.exports = {
                 errno: 0,
                 data: seller
             })
-        })
+        }),
+        app.post('/api/seller', (req, res) => {
+          res.json({
+              // 这里是你的json内容
+              errno: 0,
+              data: seller
+          })
+      })
     },
   }
 }
