@@ -17,6 +17,7 @@ const LOGIN_PAGE_NAME = 'login'
 // 路由跳转前验证
 router.beforeEach((to, from, next) => {
     const token = getToken()
+    console.log('rout')
     if (!token && to.name !== LOGIN_PAGE_NAME) {
         // 未登录且要跳转的页面不是登录页
         next({

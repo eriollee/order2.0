@@ -31,7 +31,7 @@ export default {
       this.handleLogin({ userName, password }).then(res => {
          console.log(res)
           this.$router.push({
-            name: 'order_manager'
+            name: this.$config.homeName
           })
       })
     }

@@ -51,4 +51,33 @@ export default [
           }
         ]
       },
+      {
+        path: '/system',
+        name: 'system',
+        meta: {
+          icon: 'logo-buffer',
+          title: '系统管理'
+        },
+        component: Main,
+        children: [
+          {
+            path: 'list',
+            name: 'system_list',
+            meta: {
+              icon: 'md-trending-up',
+              title: '统计列表'
+            },
+            component: () => import('@/view/system-list/system-list.vue')
+          },
+          {
+            path: 'manager',
+            name: 'system_manager',
+            meta: {
+              icon: 'ios-infinite',
+              title: '统计管理'
+            },
+            component: () => import('@/view/system-manager/system-manager.vue')
+          },
+        ]
+      }
 ]
