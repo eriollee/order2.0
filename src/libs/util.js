@@ -1,5 +1,21 @@
 
+import Cookies from 'js-cookie'
 import { forEach, hasOneOf, } from '@/libs/tools'
+import config from '@/config'
+const {  cookieExpires } = config
+
+export const TOKEN_KEY = 'token'
+
+export const setToken = (token) => {
+  Cookies.set(TOKEN_KEY, token, {expires: cookieExpires || 1})
+}
+
+export const getToken = () => {
+  setToken('')
+  const token = Cookies.get(TOKEN_KEY)
+  if (token) return token
+  else return false
+}
 
 // scrollTop animation
 export const scrollTop = (el, from = 0, to, duration = 500, endCallback) => {

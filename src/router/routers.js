@@ -12,8 +12,8 @@ export default [
     },
     {
         path: '/',
-        redirect: '/order/manager',
-        name: '_order_manager',
+        redirect: '/order/list',
+        name: '_order_list',
         meta: {
             icon: 'md-notifications',
             title: '订单统计'
@@ -21,13 +21,13 @@ export default [
         component: Main,
         children: [
             {
-              path: 'order/manager',
-              name: 'order_manager',
+              path: 'order/list',
+              name: 'order_list',
               meta: {
                 icon: 'md-notifications',
                 title: '订单统计',
               },
-              component: () => import('@/view/order-manager/order-manager.vue')
+              component: () => import('@/view/order-list/order-list.vue')
             }
           ]
     },
@@ -40,14 +40,14 @@ export default [
         component: Main,
         children: [
           {
-            path: 'list',
-            name: 'order_list',
+            path: 'manager',
+            name: 'order_manager',
             meta: {
               icon: 'ios-hammer',
               title: '订单管理',
               beforeCloseName: 'before_close_normal'
             },
-            component: () => import('@/view/order-list/order-list.vue')
+            component: () => import('@/view/order-manager/order-manager.vue')
           }
         ]
       },

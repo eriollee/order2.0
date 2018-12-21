@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import routes from './routers'
-
+import { setToken, getToken  } from '@/libs/util'
+import config from '@/config'
+const { homeName } = config
 
 Vue.use(Router)
 
@@ -10,18 +12,29 @@ const router = new Router({
   mode: 'history'
 })
 
+const LOGIN_PAGE_NAME = 'login'
 
 // 路由跳转前验证
 router.beforeEach((to, from, next) => {
-    // if(to.name === 'login'){//未登录，强制登录
-    //     console.log('login')
-    //     next({
-    //         name:"login"  // 将跳转的路由path作为参数，登录成功后跳转到该路由
-    //     });
-    // }else{
-        // console.log('else')
+    const token = getToken()
+    if (!token && to.name !== LOGIN_PAGE_NAME) {
+        // 未登录且要跳转的页面不是登录页
+        next({
+          name: LOGIN_PAGE_NAME // 跳转到登录页
+        })
+    } else if (!token && to.name === LOGIN_PAGE_NAME) {
+        // 未登陆且要跳转的页面是登录页
+        next() // 跳转
+    } else if (token && to.name === LOGIN_PAGE_NAME) {
+        // console.log('token && to.name === LOGIN_PAGE_NAME')
+        // 已登录且要跳转的页面是登录页
+        next({
+          name: homeName // 跳转到homeName页
+        })
+      } else{ 
         next();
-    // }
+    }
+    
      
 })
 
