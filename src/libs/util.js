@@ -7,11 +7,15 @@ const {  cookieExpires } = config
 export const TOKEN_KEY = 'token'
 
 export const setToken = (token) => {
-  Cookies.set(TOKEN_KEY, token, {expires: cookieExpires || 1})
+    const inTwentySeconds= new Date(new Date().getTime() + 20 *  1000);
+    Cookies.set(TOKEN_KEY, token, 
+    {
+      expires: inTwentySeconds
+    });
 }
 
 export const getToken = () => {
-//  setToken('')
+  //Cookies.set(TOKEN_KEY, '');
   const token = Cookies.get(TOKEN_KEY)
   if (token) return token
   else return false

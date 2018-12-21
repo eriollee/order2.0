@@ -1,0 +1,11 @@
+{
+    "data": {
+        "userRoles": [
+            "ROLE_BASIC",
+			"ROLE_ADMIN"
+        ],
+        "isLogged": true,
+        "userName": "李四"
+    },
+    "success": true
+}

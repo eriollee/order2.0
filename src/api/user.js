@@ -6,8 +6,15 @@ export const login = ({ userName, password }) => {
     password
   }
   return axios.request({
-    url: 'api/seller',
+    url: 'api/session/login_mail',
     data,
     method: 'post'
+  })
+}
+
+export const logout = (token) => {
+  return axios.request({
+    url: 'api/session/logout',
+    method: 'get'
   })
 }

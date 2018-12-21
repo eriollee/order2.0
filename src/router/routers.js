@@ -56,7 +56,8 @@ export default [
         name: 'system',
         meta: {
           icon: 'logo-buffer',
-          title: '系统管理'
+          title: '系统管理',
+          access: ['ROLE_ADMIN'],
         },
         component: Main,
         children: [

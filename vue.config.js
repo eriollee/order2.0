@@ -3,6 +3,7 @@ const path = require('path')
 const express = require('express')
 const app = express()
 var appData = require('./data/goodlist.json')
+var user = require('./data/user.json')
 var seller = appData
 var apiRoutes = express.Router();
 app.use('/api',apiRoutes)
@@ -70,7 +71,17 @@ module.exports = {
               errno: 0,
               data: seller
           })
-      })
+        }),
+        app.post('/api/session/login_mail', (req, res) => {
+          res.json({
+              data: user
+          })
+        }),
+        app.get('/api/session/logout', (req, res) => {
+          res.json({
+              data: user
+          })
+        })
     },
   }
 }

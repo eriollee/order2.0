@@ -1,0 +1,9 @@
+{
+    "data":{
+        "userRoles":[
+        ],
+        "isLogged":false,
+        "userName":"Guest"
+    },
+    "success":true
+}

@@ -9,12 +9,9 @@
     </Sider>    
     <Layout>
       <Header class="header-con">
-        <!-- <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
-          <user :message-unread-count="unreadCount" :user-avator="userAvator"/>
-          <language v-if="$config.useI18n" @on-lang-change="setLocal" style="margin-right: 10px;" :lang="local"/>
-          <error-store v-if="$config.plugin['error-store'] && $config.plugin['error-store'].showInHeader" :has-read="hasReadErrorPage" :count="errorCount"></error-store>
-          <fullscreen v-model="isFullscreen" style="margin-right: 10px;"/>
-        </header-bar> -->
+        <header-bar  >
+             <user   :user-name="userName"/>
+        </header-bar>
       </Header>
       <Content class="main-content-con">
         <Layout class="main-layout-con">
@@ -34,10 +31,12 @@
 <script>
 import './main.less'
 import SideMenu from './components/side-menu'
+import User from './components/user'
 import routers from '@/router/routers'
 import ABackTop from './components/a-back-top'
 import { mapMutations, mapActions, mapGetters } from 'vuex'
 import maxLogo from '@/assets/images/logo.jpg'
+import HeaderBar from './components/header-bar'
 
 export default {
   name: 'Main',
@@ -46,7 +45,9 @@ export default {
   },
   components: {
     SideMenu,
-    ABackTop
+    ABackTop,
+    User,
+    HeaderBar
   },
   data () {
     return {
@@ -61,6 +62,9 @@ export default {
     menuList () {
       // console.log('menuList')
       return this.$store.getters.menuList
+    },
+    userName () {
+      return this.$store.state.user.userName
     },
   },
   methods: {
