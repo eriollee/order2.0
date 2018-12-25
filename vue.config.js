@@ -4,6 +4,8 @@ const express = require('express')
 const app = express()
 var appData = require('./data/goodlist.json')
 var user = require('./data/user.json')
+var table = require('./data/table.json')
+var syslist = require('./data/systemlist.json')
 var seller = appData
 var apiRoutes = express.Router();
 app.use('/api',apiRoutes)
@@ -81,7 +83,17 @@ module.exports = {
           res.json({
               data: user
           })
-        })
+        }),
+        app.get('/get_table_data', (req, res) => {
+          res.json({
+              data: table
+          })
+        }),
+        app.get('/api/admin/getsys', (req, res) => {
+          res.json({
+              data: syslist
+          })
+        })        
     },
   }
 }

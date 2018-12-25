@@ -7,7 +7,7 @@ const {  cookieExpires } = config
 export const TOKEN_KEY = 'token'
 
 export const setToken = (token) => {
-    const inTwentySeconds= new Date(new Date().getTime() + 20 *  1000);
+    const inTwentySeconds= new Date(new Date().getTime() + 20 *60*  1000);
     Cookies.set(TOKEN_KEY, token, 
     {
       expires: inTwentySeconds
@@ -121,4 +121,74 @@ const showThisMenuEle = (item, access) => {
       if (hasOneOf(item.meta.access, access)) return true
       else return false
     } else return true
+}
+
+
+const fmtDateTime = (d1,h1,d2,h2) => {
+  let dateTemp1 = this.fmtDate(d1) + ' '+ h1
+  let dateTemp2 = this.fmtDate(d2) + ' '+ h2
+  dateTemp1 = dateTemp1.replace("-","/");//替换字符，变成标准格式 
+  dateTemp2 = dateTemp2.replace("-","/");//替换字符，变成标准格式   
+  let date1 = new Date(Date.parse(dateTemp1));  
+  let date2 = new Date(Date.parse(dateTemp2));  
+ if(date1<=date2){
+     return true
+ }else{
+     return false
+ }
+ 
+}
+const fmtDate = (obj) =>{
+ let date =  new Date(obj);
+ let y = 1900+date.getYear();
+ let m = "0"+(date.getMonth()+1);
+ let d = "0"+date.getDate();
+ return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
+}
+
+const fmtTime = (inputTime)  => {
+ let date = new Date(inputTime);  
+ let h = date.getHours();  
+ h = h < 10 ? ('0' + h) : h;  
+ let minute = date.getMinutes();  
+ let second = date.getSeconds();  
+ minute = minute < 10 ? ('0' + minute) : minute;    
+ second = second < 10 ? ('0' + second) : second;   
+ return h+':'+minute+':'+second;    
+}
+const change = (status,index=0,type ="0") => {
+     if(!status){
+         this.switchShow = true;
+         this.$emit('report', this.fmtDate(this.startDate),this.startTimeValue,this.fmtDate(this.endDate),this.endTimeValue,this.index);
+     }else{
+         if(this.startDate ==""){
+             this.$Message.error("请选择起始日期");
+             if(type =="1"){
+                 this.$emit('setSwitchOff',index);
+             }
+         }else if(this.endDate ==""){
+             this.$Message.error("请选择截止日期");
+             if(type =="1"){
+                 this.$emit('setSwitchOff',index);
+             }
+         }else if(this.endTimeValue == ''){
+             this.$Message.error('请选择截止时间');
+             if(type =="1"){
+                 this.$emit('setSwitchOff',index);
+             }
+         }else if(this.startTimeValue == ''){
+             this.$Message.error('请选择起始时间');
+             if(type =="1"){
+                 this.$emit('setSwitchOff',index);
+             }
+         }else if(this.fmtDateTime(this.startDate,this.startTimeValue,this.endDate,this.endTimeValue) == false){
+             this.$Message.error('起始时间大于截止时间');
+             if(type =="1"){
+                 this.$emit('setSwitchOff',index);
+             }
+         }
+         else{
+             this.$emit('report', this.fmtDate(this.startDate),this.startTimeValue,this.fmtDate(this.endDate),this.endTimeValue,this.index);
+         }
+     }             
 }

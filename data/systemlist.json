@@ -1,0 +1,30 @@
+{
+    "code": 0,
+    "msg": "success",
+    "data": [
+        {
+            "systemId": "001",
+            "systemFlag": "11111",
+            "startTime": 1541124938000,
+            "endTime": 1541124938000,
+            "isOpen": false,
+            "systemName": "外卖点餐"
+        },
+        {
+            "systemId": "002",
+            "systemFlag": "01100",
+            "startTime": 1541983934000,
+            "endTime": 1541983934000,
+            "isOpen": false,
+            "systemName": "文化套餐"
+        },
+        {
+            "systemId": "003",
+            "systemFlag": "01100",
+            "startTime": 1541983936000,
+            "endTime": 1541983936000,
+            "isOpen": false,
+            "systemName": "送温暖"
+        }
+    ]
+}
