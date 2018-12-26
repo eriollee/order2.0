@@ -8,7 +8,6 @@ export const getTableData = () => {
 }
 
 export const getSystemList = () => {
-  console.log('getSystemList')
   return axios.request({
     url: 'api/admin/getsys',
     method: 'get'
