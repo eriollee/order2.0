@@ -124,7 +124,7 @@ const showThisMenuEle = (item, access) => {
 }
 
 
-const fmtDateTime = (d1,h1,d2,h2) => {
+export const fmtDateTime = (d1,h1,d2,h2) => {
   let dateTemp1 = this.fmtDate(d1) + ' '+ h1
   let dateTemp2 = this.fmtDate(d2) + ' '+ h2
   dateTemp1 = dateTemp1.replace("-","/");//替换字符，变成标准格式 
@@ -138,7 +138,7 @@ const fmtDateTime = (d1,h1,d2,h2) => {
  }
  
 }
-const fmtDate = (obj) =>{
+export const fmtDate = (obj) =>{
  let date =  new Date(obj);
  let y = 1900+date.getYear();
  let m = "0"+(date.getMonth()+1);
@@ -146,7 +146,7 @@ const fmtDate = (obj) =>{
  return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
 }
 
-const fmtTime = (inputTime)  => {
+export const fmtTime = (inputTime)  => {
  let date = new Date(inputTime);  
  let h = date.getHours();  
  h = h < 10 ? ('0' + h) : h;  

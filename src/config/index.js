@@ -12,6 +12,34 @@ export default {
     pro: 'https://produce.com'
   },
 
+   /**
+   * @description 统计类型
+   */
+  statType: [
+    {
+      code: '0',
+      name:'单选'
+    },  
+     {
+      code :'1',
+      name:'订购'
+    }
+  ],
+
+  /**
+   * @description 选择类型
+   */
+  chooseType: [
+    {
+      code: '0',
+      name:'不填'
+    },  
+     {
+      code :'1',
+      name:'必填'
+    }
+  ],
+
     /**
    * @description token在Cookie中存储的天数，默认1天
    */

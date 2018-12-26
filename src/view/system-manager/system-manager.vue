@@ -3,7 +3,7 @@
   <div style="padding-bottom:10px; virtical-align: middle;" >
          <Button @click="modalAdd = true" style="  " >  <Icon type="md-add" size="16"style="padding-bottom:1px" /><span style="  "> 新增统计</span></Button>
   </div>
-  <Table :columns="columns" :data="data">
+  <Table :loading="loading"  :columns="columns" :data="data">
     <template slot-scope="{ row, index }" slot="name">
       <Input type="text" v-model="editName" v-if="editIndex === index" />
       <span v-else>{{ row.name }}</span>
@@ -11,12 +11,12 @@
 
     <template slot-scope="{ row, index }" slot="type">
       <Input type="text" v-model="editAge" v-if="editIndex === index" />
-      <span v-else>{{ row.age }}</span>
+      <span v-else>{{ row.type }}</span>
     </template>
 
     <template slot-scope="{ row, index }" slot="date">
       <Input type="text" v-model="editBirthday" v-if="editIndex === index" />
-      <span v-else>{{ getBirthday(row.birthday) }}</span>
+      <span v-else>{{ row.date}}</span>
     </template>
 
     <template slot-scope="{ row, index }" slot="mobile">
@@ -52,22 +52,34 @@
 </template>
 <script>
   import { getSystemList } from '@/api/data'
+  import { fmtDate, fmtTime } from '@/libs/util'
+  import config from '@/config'
+  const { statType } = config
+
   export default {
     name: 'system_manager',
     data () {
       return {
+        startTimeValue: '',
+        endTimeValue: '',
+        startDate:'',
+        endDate:'',
+        loading: true,
         modalAdd: false,
          columns: [
           {
             title: '统计名称',
+            width:100,
             slot: 'name'
           },
           {
             title: '类型',
+            width:100,
             slot: 'type'
           },
           {
             title: '统计起始日期',
+            width:350,
             slot: 'date'
           },
           {
@@ -93,15 +105,29 @@
     },
     mounted () {
       getSystemList().then(res => {
-        // console.log(res.data.data)
+          console.log(res.data.data)
+          console.log(statType)
        // flag 数据字典 统计类型 0 单选 1 订购 是否上线 是否开启 是否必填手机号 是否显示快递 0 否 1 是
           let tempData = []
           res.data.data.data.forEach((v,k)=>{
-          let tempDataEle = {}
-          tempDataEle.name = v.systemName
-          tempData.push(tempDataEle);
-        })
+            let tempDataEle = {}
+            tempDataEle.name = v.systemName
+            //类型初始化
+            statType.forEach((v2,k2)=>{
+              if(v.systemFlag.substring(0,1) == v2.code)  tempDataEle.type = v2.name
+            })
+           //日期范围初始化
+            this.startDate = fmtDate(v.startTime)
+            this.startTimeValue = fmtTime(v.startTime)
+            console.log(this.startDate)
+            this.endDate = fmtDate(v.endTime)
+            this.endTimeValue = fmtTime(v.endTime)
+            tempDataEle.date =  this.startDate + " "+ this.startTimeValue + "~" + 
+            this.endDate + " " + this.endTimeValue
+            tempData.push(tempDataEle);
+          })
         this.data = tempData
+        this.loading = false;
       })
     },
     methods: {
