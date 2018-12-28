@@ -36,14 +36,14 @@
 
     <template slot-scope="{ row, index }" slot="action">
       <div v-if="editIndex === index">
-        <Button @click="handleSave(index)">保存</Button>
-        <Button @click="editIndex = -1">取消</Button>
+        <Button type="success" style="margin:2px"  @click="handleSave(index)">保存</Button>
+        <Button type="warning" style="margin:2px" @click="editIndex = -1">取消</Button>
       </div>
       <div v-else>
-        <Button style="margin:2px"  @click="handleEdit(row, index)">编辑</Button>
-        <Button style="margin:2px"  @click="handleEdit(row, index)">上线</Button>
-        <Button style="margin:2px"  @click="handleEdit(row, index)">开启</Button>
-        <Button style="margin:2px"  @click="handleEdit(row, index)">导出</Button>
+        <Button style="margin:2px" type="info"  @click="handleEdit(row, index)">编辑</Button>
+        <Button style="margin:2px" type="success" @click="handleEdit(row, index)">上线</Button>
+        <Button style="margin:2px" type="warning"  @click="handleEdit(row, index)">开启</Button>
+        <Button style="margin:2px" type="error"  @click="handleEdit(row, index)">导出</Button>
       </div>
     </template>
   </Table>
@@ -58,8 +58,8 @@
   </Row>
 </template>
 <script>
-  import { getSystemList } from '@/api/data'
-  import { fmtDate, fmtTime } from '@/libs/util'
+  import { getSystemList , openSystem } from '@/api/data'
+  import { fmtDate, fmtTime ,fmtTimeAndDate } from '@/libs/util'
   import config from '@/config'
   const { statType ,chooseType } = config
 
@@ -135,7 +135,7 @@
             this.startTimeValue = fmtTime(v.startTime)
             this.endDate = fmtDate(v.endTime)
             this.endTimeValue = fmtTime(v.endTime)
-            tempDataEle.date =  this.startDate + " "+ this.startTimeValue + "-" + 
+            tempDataEle.date =  this.startDate + " "+ this.startTimeValue + " - " + 
             this.endDate + " " + this.endTimeValue
             //手机 地址是否必填初始化
             chooseType.forEach((v2,k2)=>{
@@ -144,6 +144,8 @@
             })
             tempDataEle.startTime = v.startTime
             tempDataEle.endTime = v.endTime
+            //标志位初始化
+            tempDataEle.systemFlag = v.systemFlag
             tempData.push(tempDataEle);
        
           })
@@ -166,18 +168,19 @@
         this.editIndex = index;
       },
       handleSave (index) {
-        this.data[index].name = this.editName;
-        this.data[index].age = this.editAge;
-        this.data[index].birthday = this.editDate;
-        this.data[index].address = this.editAddress;
-        this.editIndex = -1;
-      },
-      getBirthday (birthday) {
-        const date = new Date(parseInt(birthday));
-        const year = date.getFullYear();
-        const month = date.getMonth() + 1;
-        const day = date.getDate();
-        return `${year}-${month}-${day}`;
+        this.loading = true;
+        openSystem(this.data[index].id,fmtTimeAndDate(this.editDate[0]),fmtTimeAndDate(this.editDate[1]),this.data[index].systemFlag).then
+         (res=>{
+           //   console.log(res)
+              this.data[index].name = this.editName;
+              this.data[index].date = fmtTimeAndDate(this.editDate[0]) +" - " +  fmtTimeAndDate(this.editDate[1]);
+              this.data[index].mobile = this.editMobile;
+              this.data[index].address = this.editAddress;
+              this.editIndex = -1;
+              this.loading = false;                    
+          }).catch( error => {
+              this.loading = false;        
+          });
       }
     }
   }

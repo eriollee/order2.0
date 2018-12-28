@@ -123,7 +123,7 @@ const showThisMenuEle = (item, access) => {
     } else return true
 }
 
-
+//时间格式化
 export const fmtDateTime = (d1,h1,d2,h2) => {
   let dateTemp1 = this.fmtDate(d1) + ' '+ h1
   let dateTemp2 = this.fmtDate(d2) + ' '+ h2
@@ -136,8 +136,9 @@ export const fmtDateTime = (d1,h1,d2,h2) => {
  }else{
      return false
  }
- 
 }
+
+//时间格式化
 export const fmtDate = (obj) =>{
  let date =  new Date(obj);
  let y = 1900+date.getYear();
@@ -146,6 +147,7 @@ export const fmtDate = (obj) =>{
  return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
 }
 
+//时间格式化
 export const fmtTime = (inputTime)  => {
  let date = new Date(inputTime);  
  let h = date.getHours();  
@@ -156,6 +158,22 @@ export const fmtTime = (inputTime)  => {
 //  second = second < 10 ? ('0' + second) : second;   
  return h+':'+minute;    
 }
+
+//时间格式化
+export const fmtTimeAndDate = (inputTime)  => {
+  let date = new Date(inputTime);  
+  let y = 1900+date.getYear();
+  let m = "0"+(date.getMonth()+1);
+  let d = "0"+date.getDate();
+  let h = date.getHours();  
+  h = h < 10 ? ('0' + h) : h;  
+  let minute = date.getMinutes();  
+ //  let second = date.getSeconds();  
+  minute = minute < 10 ? ('0' + minute) : minute;    
+ //  second = second < 10 ? ('0' + second) : second;   
+  return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length)+" "+h+':'+minute;    
+ }
+
 const change = (status,index=0,type ="0") => {
      if(!status){
          this.switchShow = true;

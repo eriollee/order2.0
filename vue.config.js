@@ -93,6 +93,11 @@ module.exports = {
           res.json({
               data: syslist
           })
+        }),
+        app.get('/api/admin/product/open_sys', (req, res) => {
+          res.json({
+              data: user
+          })
         })        
     },
   }

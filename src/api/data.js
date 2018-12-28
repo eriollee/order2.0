@@ -14,6 +14,22 @@ export const getSystemList = () => {
   })
 }
 
+export const openSystem = (id,sdate,edate,flag) => {
+  return axios.request({
+    url: 'api/admin/product/open_sys',
+    params:{
+      startTime:sdate,
+      endTime:edate,
+      flag
+    },
+    method: 'get'
+  })
+}
+
+
+
+
+
 
 export const getDragList = () => {
   return axios.request({

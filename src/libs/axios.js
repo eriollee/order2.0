@@ -1,6 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
-// import { Spin } from 'iview'
+import { Message } from 'iview'
 const addErrorLog = errorInfo => {
   const { statusText, status, request: { responseURL } } = errorInfo
   let info = {
@@ -60,7 +60,9 @@ class HttpRequest {
           request: { responseURL: config.url }
         }
       }
-      addErrorLog(errorInfo)
+     // console.log(errorInfo)
+      Message.error('服务器开小差了...'+errorInfo.status+' '+ errorInfo.statusText);
+      //addErrorLog(errorInfo)
       return Promise.reject(error)
     })
   }
